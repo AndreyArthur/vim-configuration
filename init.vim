@@ -1,14 +1,15 @@
 " Vim Plug
 call plug#begin()
-Plug 'tomasr/molokai'
-Plug 'vim-airline/vim-airline-tdefaulthemes'
-Plug 'alvan/vim-closetag'
+Plug 'dracula/vim'
+Plug 'mattn/emmet-vim'
+Plug 'ianks/vim-tsx'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'neoclide/coc.nvim'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'phanviet/vim-monokai-pro'
 Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
@@ -23,17 +24,23 @@ set number
 set relativenumber
 set encoding=utf8
 set colorcolumn=81
+set nowrap
+nnoremap <space> i<space><esc>
+nnoremap <CR> i<CR><esc>
 
-" Tabs Navigation
-nnoremap <tab>t :tabnew<CR>
-nnoremap <tab>n :tabnext<CR>
-nnoremap <tab>p :tabprevious<CR>
+  " Tabs navigation mapping
+  nnoremap <c-t>d :tabclose<CR>
+  nnoremap <c-t>n :tabnew<CR>
+  nnoremap <c-t>l :tabnext<CR>
+  nnoremap <c-t>h :tabprevious<CR>
+  nnoremap <c-t>t :tabnew<CR>:term<CR>
 
 " CoC
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-eslint',
-  \ 'coc-git'
+  \ 'coc-git',
+  \ 'coc-emmet'
   \ ]
 nmap <F2> <Plug>(coc-rename)
 nmap <silent> gd <Plug>(coc-definition)
@@ -48,16 +55,18 @@ function! s:show_documentation()
   endif
 endfunction
 
+" Emmet Vim
+let g:user_emmet_mode='n'
+let g:user_emmet_leader_key=','
+
 " Theme
 set termguicolors
-colorscheme molokai
-let g:molokai_original = 1
+set t_Co=256
+colorscheme dracula
 
 " NERDTree
 nnoremap <C-n> :NERDTreeToggle<CR>
-nnoremap <C-t> :NERDTreeFocus<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
-autocmd VimEnter * NERDTree
 let NERDTreeShowHidden=1
 
 " Devicons
@@ -67,9 +76,10 @@ set guifont=DroidSansMono\ Nerd\ Font\ 11
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
   endif
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ''
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#tabline#left_alt_sep = ''
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''

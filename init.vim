@@ -1,8 +1,9 @@
 " Vim Plug
 call plug#begin()
-Plug 'dracula/vim'
-Plug 'mattn/emmet-vim'
+Plug 'thanthese/Tortoise-Typing'
+Plug 'ayu-theme/ayu-vim'
 Plug 'ianks/vim-tsx'
+Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
@@ -27,7 +28,8 @@ set colorcolumn=81
 set nowrap
 nnoremap <space> i<space><esc>
 nnoremap <CR> i<CR><esc>
-
+tnoremap <esc> <c-\><c-n>
+autocmd BufRead,BufNewFile *.json,.babelrc set filetype=json
   " Tabs navigation mapping
   nnoremap <c-t>d :tabclose<CR>
   nnoremap <c-t>n :tabnew<CR>
@@ -62,7 +64,8 @@ let g:user_emmet_leader_key=','
 " Theme
 set termguicolors
 set t_Co=256
-colorscheme dracula
+let g:ayucolor="dark"
+colorscheme ayu
 
 " NERDTree
 nnoremap <C-n> :NERDTreeToggle<CR>

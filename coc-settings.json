@@ -1,4 +1,9 @@
 {
   "suggest.noselect": false,
-  "eslint.autoFixOnSave": true
+  "eslint.autoFixOnSave": true,
+  "typescript.suggest.completeFunctionCalls": false,
+  "javascript.suggest.completeFunctionCalls": false,
+  "explorer.icon.enableNerdfont": true,
+  "explorer.file.showHiddenFiles": true,
+  "explorer.width": 33
 }

@@ -4,8 +4,9 @@
   
   " Gruvbox Colorscheme
     Plug 'morhetz/gruvbox'
-  
-  " *.tsx files support
+
+  " JSX support
+    Plug 'MaxMEllon/vim-jsx-pretty'
     Plug 'ianks/vim-tsx'
 
   " Airline
@@ -66,32 +67,19 @@
   " Bindings
   
     " Search for all occurrences of the word that cursor is above
-      nnoremap <c-s>w yiw:SearchLiteral <c-r>"<cr>
+      nnoremap <silent> <c-s>w yiw:SearchLiteral <c-r>"<cr>
 
     " Search for all occurrences of the current visual selection
-      vnoremap <c-s>v y:SearchLiteral <c-r>"<cr>
+      vnoremap <silent> <c-s>v y:SearchLiteral <c-r>"<cr>
 
     " Disable search selection highlighting
-      nnoremap <c-s>h :noh<cr>
+      nnoremap <silent> <c-s>h :noh<cr>
 
     " Return to normal mode in terminal
       tnoremap <esc> <c-\><c-n>
 
     " Copy to clipboard
-      vnoremap <c-c> y:call system("xclip -i -selection clipboard", getreg("\""))<CR>
-
-    " New tab
-      nnoremap <c-t>n :tabnew<CR>
-
-    " Go to next tab
-      nnoremap <c-t>l :tabnext<CR>
-
-    " Go to previous tab
-      nnoremap <c-t>h :tabprevious<CR>
-
-    " New terminal tab (it does not look like but is really useful) 
-      nnoremap <c-t>t :tabnew<CR>:term<CR>i
-
+      vnoremap <silent> <c-c> y:call system("xclip -i -selection clipboard", getreg("\""))<CR>
 
 " CoC
 
@@ -104,7 +92,8 @@
       \ 'coc-pairs',
       \ 'coc-json',
       \ 'coc-phpls',
-      \ 'coc-explorer'
+      \ 'coc-explorer',
+      \ 'coc-css'
       \ ]
 
   " Rename an identifier
@@ -131,20 +120,17 @@
     inoremap <silent><expr> <cr> "\<c-g>u\<CR>"
 
   " Toggle coc-explorer window
-    nnoremap <c-n> :CocCommand explorer --toggle<cr>
+    nnoremap <silent> <c-n> :CocCommand explorer --toggle<cr>
 
 " Theme
 
   " Enabling termguicolors (a lot of colorschemes will not work without this option)
     set termguicolors
 
-  " Setting gruvbox contrast to hard
-    let g:gruvbox_contrast_dark='hard'
-
   " Setting gruvbox dark
     set background=dark
 
-  " Setting gruvbox as the colorscheme
+  " Setting colorscheme
     colorscheme gruvbox
 
 " Devicons

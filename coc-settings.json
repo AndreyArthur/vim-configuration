@@ -5,5 +5,12 @@
   "javascript.suggest.completeFunctionCalls": false,
   "explorer.icon.enableNerdfont": true,
   "explorer.file.showHiddenFiles": true,
-  "explorer.width": 33
+  "explorer.width": 33,
+  "explorer.autoExpandOptions": [
+    "uncompact"
+  ],
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "typescriptreact": "javascriptreact"
+  }
 }

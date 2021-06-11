@@ -5,6 +5,11 @@
   " Gruvbox Colorscheme
     Plug 'morhetz/gruvbox'
 
+  " Fuzzy Finder
+    Plug 'nvim-lua/popup.nvim'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
+
   " JSX support
     Plug 'MaxMEllon/vim-jsx-pretty'
     Plug 'ianks/vim-tsx'
@@ -42,7 +47,7 @@
   " Encoding
     set encoding=utf8
 
-  " Wrap
+  " Disable Wrap
      set nowrap
 
   " Column lines
@@ -55,6 +60,9 @@
     autocmd BufRead,BufNewFile *.json,.babelrc set filetype=json
     autocmd FileType markdown set wrap
 
+  " Disable line numbers in terminal mode
+    autocmd TermOpen * setlocal nonumber norelativenumber
+
   " Representing especific chars with other chars
     set listchars=tab:>~
     set list
@@ -62,24 +70,30 @@
   " Snippets
   
     " jest 
-      nnoremap ,jest :-1read $HOME/.config/nvim/snippets/jest.ts<CR>f'a
+      nnoremap <m-s>jest :-1read $HOME/.config/nvim/snippets/jest.ts<CR>f'a
 
   " Bindings
   
-    " Search for all occurrences of the word that cursor is above
-      nnoremap <silent> <c-s>w yiw:SearchLiteral <c-r>"<cr>
-
-    " Search for all occurrences of the current visual selection
-      vnoremap <silent> <c-s>v y:SearchLiteral <c-r>"<cr>
-
-    " Disable search selection highlighting
-      nnoremap <silent> <c-s>h :noh<cr>
-
     " Return to normal mode in terminal
       tnoremap <esc> <c-\><c-n>
 
     " Copy to clipboard
       vnoremap <silent> <c-c> y:call system("xclip -i -selection clipboard", getreg("\""))<CR>
+
+    " Open a new tab
+      nnoremap <silent> g. :tabnew<cr>
+
+    " Open terminal mode
+      nnoremap <silent> <c-q> :terminal<cr>
+
+    " Use ctrl+(hjkl) to move in insert mode
+      inoremap <c-h> <left>
+      inoremap <c-j> <down>
+      inoremap <c-k> <up>
+      inoremap <c-l> <right>
+
+    " :edit command from current file path 
+      nnoremap <leader>e :e <C-R>=expand('%:p:h') . '/'<CR>
 
 " CoC
 
@@ -120,7 +134,18 @@
     inoremap <silent><expr> <cr> "\<c-g>u\<CR>"
 
   " Toggle coc-explorer window
-    nnoremap <silent> <c-n> :CocCommand explorer --toggle<cr>
+    nnoremap <silent> <leader>n :CocCommand explorer --toggle<cr>
+
+" Telescope
+"
+  " Find Files
+    nnoremap <leader>ff <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files prompt_prefix=⧽<cr>
+
+  " Grep
+    nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+
+  " Buffers
+    nnoremap <leader>fb <cmd>Telescope buffers<cr>
 
 " Theme
 
@@ -129,6 +154,10 @@
 
   " Setting gruvbox dark
     set background=dark
+
+  " Setting gruvbox style
+    let g:gruvbox_contrast_dark='soft'
+    let g:gruvbox_italic=1 
 
   " Setting colorscheme
     colorscheme gruvbox
